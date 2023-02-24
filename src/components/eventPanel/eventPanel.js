@@ -1,6 +1,9 @@
 import React from 'react';
-import {View, Text, Image, FlatList, TouchableOpacity} from 'react-native';
+import {useSelector} from 'react-redux';
 import {eventPanelStyles} from './styles';
+import eventPanelData from './eventPanelData';
+import {commonFunctions} from '../../utils/commonFunctions';
+import {View, Text, Image, FlatList, TouchableOpacity} from 'react-native';
 
 /**
  *
@@ -8,59 +11,73 @@ import {eventPanelStyles} from './styles';
  * @returns EventPanel
  */
 export default React.memo(function EventPanel({...props}) {
+
+  const {payload} = useSelector(store => store.informationReducer);
+  const urlForShare = payload.sources[0];
+
   /**
    *
    * @param {*} param0
    * @returns
    */
-  const _renderitem = ({item}) => {
+  const _renderitem = ({item, index}) => {
     return (
       <TouchableOpacity
-        style={eventPanelStyles.renderItemStyle}
-        activeOpacity={0.7}>
+        activeOpacity={0.7}
+        onPress={() => actionOnButton(index)}
+        style={eventPanelStyles.renderItemStyle}>
         <Image source={item.icon} />
         <Text style={eventPanelStyles.desc}>{item.description}</Text>
       </TouchableOpacity>
     );
   };
 
+  /**
+   * sharingAction
+   */
+  const shareEvent = () => {
+    commonFunctions.ShareContent(
+      urlForShare,
+      successResponse => {
+        console.log(successResponse);
+      },
+      errorResponse => {
+        console.log(errorResponse);
+      },
+    );
+  };
+
+  /**
+   *
+   * @param {*} currentIndex
+   * @returns JSX for an individual icon
+   */
+  const actionOnButton = currentIndex => {
+    switch (currentIndex) {
+      case 0:
+        return alert('like');
+      case 1:
+        return alert('dislike');
+      case 2:
+        return shareEvent();
+      case 3:
+        return alert('favorite');
+      case 4:
+        return alert('donate');
+    }
+  };
+
   return (
-    <View style={{alignItems: 'center', ...props.panelStyle}}>
+    <View style={[eventPanelStyles.container, props.panelStyle]}>
       <FlatList
-        data={[
-          {
-            id: 0,
-            icon: require('../../utils/assets/images/like(1)_2.png'),
-            description: '10',
-          },
-          {
-            id: 1,
-            icon: require('../../utils/assets/images/like(1).png'),
-            description: '50',
-          },
-          {
-            id: 2,
-            icon: require('../../utils/assets/images/noun_Share_3304093.png'),
-            description: 'Share',
-          },
-          {
-            id: 3,
-            icon: require('../../utils/assets/images/noun_Heart_2553737.png'),
-            description: 'Favorite',
-          },
-          {
-            id: 4,
-            icon: require('../../utils/assets/images/money.png'),
-            description: 'Donate',
-          },
-        ]}
         horizontal
         bounces={false}
         scrollEnabled={false}
+        data={eventPanelData}
         renderItem={_renderitem}
         showsHorizontalScrollIndicator={false}
-        contentContainerStyle={eventPanelStyles.contentContainerStyle}
         keyExtractor={(item, index) => `${item.id}-${index}`}
+        contentContainerStyle={eventPanelStyles.contentContainerStyle}
       />
     </View>
   );

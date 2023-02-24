@@ -21,4 +21,6 @@ export const eventPanelStyles = StyleSheet.create({
     color: 'grey',
     fontWeight: '600',
   },
+
+  container: {alignItems: 'center'}, 
 });

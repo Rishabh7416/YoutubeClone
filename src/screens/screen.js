@@ -1,22 +1,19 @@
 import React from 'react';
 import mockData from '../utils/mockData';
 import Card from '../components/customCards/card';
-import {useRoute} from '@react-navigation/native';
 import {useDispatch, useSelector} from 'react-redux';
 import VideoPlayer from '../components/video/videoPlayer';
 import VideoInfo from '../components/videoInfo/videoInfo';
 import EventPanel from '../components/eventPanel/eventPanel';
-import {
-  View,
-  FlatList,
-  TouchableOpacity,
-} from 'react-native';
+import {View, FlatList, TouchableOpacity} from 'react-native';
 import ChannelInfo from '../components/channelInfo/channelInfo';
+import {useIsFocused, useRoute} from '@react-navigation/native';
 
 export default function Screen() {
   const route = useRoute();
   const dispatch = useDispatch();
   const {currentIndex} = route.params;
+  const currentScreen = useIsFocused();
   const flatlistData = mockData.categories[0].videos;
   const {payload} = useSelector(store => store.informationReducer);
   const videos = payload.sources[0];
@@ -54,12 +51,16 @@ export default function Screen() {
    */
   const filteredData = React.useMemo(
     () =>
-      flatlistData.filter((item, index) => {
-        if (currentIndex !== index) {
-          return item;
-        }
-      }),
-    [],
+      flatlistData
+        .filter((item, index) => {
+          if (currentIndex !== index) {
+            if (payload.id !== item.id) {
+              return item;
+            }
+          }
+        })
+        .splice(0, 5),
+    [payload],
   );
 
   /**
@@ -67,7 +68,7 @@ export default function Screen() {
    * @param {*} param0
    * @returns
    */
-  const _renderItem = ({item, index}) => {
+  const _renderItem = React.useCallback(({item, index}) => {
     return (
       <TouchableOpacity onPress={() => onPressEvent(item)} activeOpacity={0.9}>
         <Card
@@ -77,7 +78,7 @@ export default function Screen() {
         />
       </TouchableOpacity>
     );
-  };
+  }, []);
 
   return (
     <View style={{flex: 1, backgroundColor: 'white'}}>

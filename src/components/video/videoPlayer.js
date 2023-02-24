@@ -1,9 +1,17 @@
-import {View, Image, Animated, TouchableOpacity} from 'react-native';
 import React from 'react';
 import SliderBar from '../slider';
 import Video from 'react-native-video';
 import {videoPlayerStyles} from './styles';
 import {useIsFocused} from '@react-navigation/native';
+import Orientation from 'react-native-orientation-locker';
+import {
+  View,
+  Image,
+  Animated,
+  TouchableOpacity,
+  Text,
+  ActivityIndicator,
+} from 'react-native';
 
 const VideoPlayer = ({...props}) => {
   const rnVidRef = React.useRef(null);
@@ -13,8 +21,10 @@ const VideoPlayer = ({...props}) => {
   const hitslop = {top: 10, right: 10, left: 10, bottom: 10};
   const [videoDuration, setVideoDuration] = React.useState(0);
   const [currentProgress, setCurrentProgress] = React.useState(0);
-
   const animationRef = React.useRef(new Animated.Value(1)).current;
+  const [orientationView, setOrientationView] = React.useState('');
+
+  React.useEffect(() => {}, []);
 
   /**
    *
@@ -114,6 +124,7 @@ const VideoPlayer = ({...props}) => {
           paused={playPauseStatus}
           source={{uri: props.vid}}
           onProgress={currentTimeFunc}
+          onBuffer={() => <ActivityIndicator animating={true} size="large" />}
           style={videoPlayerStyles.videoContainer}
         />
         <Animated.View
