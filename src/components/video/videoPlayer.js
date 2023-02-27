@@ -13,6 +13,7 @@ import colors from '../../utils/colors';
 import {videoPlayerStyles} from './styles';
 import localImages from '../../utils/localImages';
 import Orientation from 'react-native-orientation-locker';
+import {commonFunctions} from '../../utils/commonFunctions';
 import {SCREEN_HEIGHT, SCREEN_WIDTH} from '../../utils/dimensions';
 import {useIsFocused, useNavigation} from '@react-navigation/native';
 
@@ -149,36 +150,6 @@ const VideoPlayer = ({...props}) => {
     }
   };
 
-  const formatTime = time => {
-    const minutes = time >= 60 ? Math.floor(time / 60) : 0;
-    const seconds = Math.floor(time % 60);
-
-    return `${minutes >= 10 ? minutes : '0' + minutes}:${
-      seconds >= 10 ? seconds : '0' + seconds
-    }`;
-  };
-
-  // const formatTime = (trackTime, conditionalValues) => {
-  //   var timeInMin = Math.floor(trackTime / 59);
-  //   var timeInSec =
-  //     timeInMin >= 1
-  //       ? Math.round(trackTime) - timeInMin * 60
-  //       : Math.round(trackTime);
-  //   if (timeInMin == -1) {
-  //     timeInMin = 0;
-  //   }
-  //   if (timeInSec == -1) {
-  //     timeInSec = 0;
-  //   }
-  //   var result =
-  //     timeInSec % 60 === 0
-  //       ? `${timeInMin}:00`
-  //       : timeInSec > 9
-  //       ? `0${timeInMin}:${timeInSec}`
-  //       : `0${timeInMin}:0${timeInSec}`;
-  //   return result;
-  // };
-
   const loadStart = () => setBuffer(true);
 
   const onBackPressEvent = () => {
@@ -188,7 +159,7 @@ const VideoPlayer = ({...props}) => {
 
   return (
     <View>
-      <TouchableOpacity activeOpacity={1} onPress={orientationHandler}>
+      <TouchableOpacity activeOpacity={1}>
         <Video
           ref={refUpdater}
           onLoad={onLoading}
@@ -264,9 +235,12 @@ const VideoPlayer = ({...props}) => {
                   duration={videoDuration.duration}
                   sliderContainer={videoPlayerStyles.sliderContainer}
                 />
-                <Text style={videoPlayerStyles.timingStyle}>{`${formatTime(
+                <Text
+                  style={
+                    videoPlayerStyles.timingStyle
+                  }>{`${commonFunctions.formattingTime(
                   videoDuration.duration,
-                )}/${formatTime(currentProgress)}`}</Text>
+                )}/${commonFunctions.formattingTime(currentProgress)}`}</Text>
               </View>
               <TouchableOpacity
                 style={videoPlayerStyles.icon}
@@ -275,6 +249,7 @@ const VideoPlayer = ({...props}) => {
               </TouchableOpacity>
             </View>
           </Animated.View>
+          // <CustomControl container = {videoPlayerStyles.animatedView} />
         )}
       </TouchableOpacity>
     </View>
