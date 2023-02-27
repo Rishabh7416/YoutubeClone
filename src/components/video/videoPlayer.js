@@ -39,6 +39,17 @@ const VideoPlayer = ({...props}) => {
     setPlayPause(false);
   }, [props.vid]);
 
+  React.useEffect(() => {
+    Orientation.getOrientation(value => {
+      const state = value.includes('LANDSCAPE');
+      state && Orientation.lockToPortrait();
+    });
+    Orientation.addLockListener(value => setOrientationState(value));
+    return () => {
+      Orientation.removeLockListener(orientationHandler);
+    };
+  }, []);
+
   /**
    *
    */
@@ -123,22 +134,9 @@ const VideoPlayer = ({...props}) => {
     console.log(value);
   };
 
-  React.useEffect(() => {
-    Orientation.getOrientation(orientation => {
-      if (orientation.includes('LANDSCAPE')) {
-        Orientation.lockToPortrait();
-      }
-    });
-    Orientation.addLockListener(orientation =>
-      setOrientationState(orientation),
-    );
-    return () => {
-      Orientation.removeLockListener(orientationHandler);
-    };
-  }, []);
-
   const orientationHandler = () => {
-    if (orientationState.includes('LANDSCAPE')) {
+    const state = orientationState.includes('LANDSCAPE');
+    if (state) {
       Orientation.lockToPortrait();
       setOrientationStyle(videoPlayerStyles.videoContainer);
     } else {
@@ -146,7 +144,7 @@ const VideoPlayer = ({...props}) => {
       setOrientationStyle({
         height: SCREEN_WIDTH,
         width: SCREEN_HEIGHT,
-        backgroundColor: 'black',
+        backgroundColor: colors.black,
       });
     }
   };
@@ -159,6 +157,27 @@ const VideoPlayer = ({...props}) => {
       seconds >= 10 ? seconds : '0' + seconds
     }`;
   };
+
+  // const formatTime = (trackTime, conditionalValues) => {
+  //   var timeInMin = Math.floor(trackTime / 59);
+  //   var timeInSec =
+  //     timeInMin >= 1
+  //       ? Math.round(trackTime) - timeInMin * 60
+  //       : Math.round(trackTime);
+  //   if (timeInMin == -1) {
+  //     timeInMin = 0;
+  //   }
+  //   if (timeInSec == -1) {
+  //     timeInSec = 0;
+  //   }
+  //   var result =
+  //     timeInSec % 60 === 0
+  //       ? `${timeInMin}:00`
+  //       : timeInSec > 9
+  //       ? `0${timeInMin}:${timeInSec}`
+  //       : `0${timeInMin}:0${timeInSec}`;
+  //   return result;
+  // };
 
   const loadStart = () => setBuffer(true);
 
