@@ -3,6 +3,7 @@ import {channelInfoStyles} from './styles';
 import {View, Text, Image} from 'react-native';
 import {normalize} from '../../utils/dimensions';
 import CustomButton from '../customButton/customButton';
+import localImages from '../../utils/localImages';
 
 /**
  *
@@ -22,15 +23,7 @@ export default function ChannelInfo({...props}) {
               <Text style={channelInfoStyles.channelName}>
                 {props.channelName}
               </Text>
-              <Text
-                style={[
-                  channelInfoStyles.channelName,
-                  {
-                    fontSize: normalize(12),
-                    fontWeight: '600',
-                    color: '#rgb(103,103,104)',
-                  },
-                ]}>
+              <Text style={channelInfoStyles.subscribe}>
                 {props.subscribers}
               </Text>
             </View>
@@ -46,7 +39,7 @@ export default function ChannelInfo({...props}) {
         <View>
           <Image
             style={channelInfoStyles.commentUserStyle}
-            source={require('../../utils/assets/images/ic_expand.png')}
+            source={localImages.expandCommentIcon}
           />
           <Text style={channelInfoStyles.commentTextStyle}>
             {'Comments'}

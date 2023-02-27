@@ -1,4 +1,5 @@
 import {StyleSheet} from 'react-native';
+import colors from '../../utils/colors';
 import {normalize, SCREEN_HEIGHT, SCREEN_WIDTH} from '../../utils/dimensions';
 
 export const videoPlayerStyles = StyleSheet.create({
@@ -24,7 +25,7 @@ export const videoPlayerStyles = StyleSheet.create({
 
   videoContainer: {
     width: SCREEN_WIDTH,
-    backgroundColor: 'black',
+    backgroundColor: colors.black,
     height: SCREEN_HEIGHT / 3.4,
   },
 
@@ -43,10 +44,10 @@ export const videoPlayerStyles = StyleSheet.create({
   },
 
   timingStyle: {
-    fontSize: normalize(11),
-    color: 'white',
     fontWeight: '600',
     letterSpacing: 0.1,
+    color: colors.white,
+    fontSize: normalize(11),
   },
 
   icon: {

@@ -6,16 +6,15 @@ export const videoInfoStyles = StyleSheet.create({
   container: {
     width: '90%',
     alignSelf: 'center',
-    // paddingVertical: 8
   },
   desciptionStyle: {
-    color: colors.dark,
     fontWeight: '400',
+    color: colors.dark,
     fontSize: normalize(13),
   },
   titleStyle: {
-    color: 'black',
     fontWeight: 'bold',
+    color: colors.black,
     fontSize: normalize(16),
   },
   viewersStyle: {
@@ -23,7 +22,7 @@ export const videoInfoStyles = StyleSheet.create({
     marginVertical: normalize(12),
   },
   buttonText: {
-    color: colors.dark,
     fontWeight: '700',
+    color: colors.dark,
   },
 });

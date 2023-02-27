@@ -13,6 +13,10 @@ export default React.memo(function Card({...props}) {
     }, 2000);
   };
 
+  const onLoadLoader = () => {
+    setLoader(true);
+  };
+
   return (
     <View style={[customCardStyle.container, props.containerStyle]}>
       <View style={customCardStyle.childContainer}>
@@ -23,7 +27,7 @@ export default React.memo(function Card({...props}) {
           />
         )}
         <Image
-          onLoad={() => setLoader(true)}
+          onLoad={onLoadLoader}
           onLoadEnd={_onLoadEnd}
           resizeMode="cover"
           style={customCardStyle.thumbnail}

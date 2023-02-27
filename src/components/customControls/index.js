@@ -1,5 +1,6 @@
-import {View, Animated} from 'react-native';
 import React from 'react';
+import colors from '../../utils/colors';
+import {View, Animated} from 'react-native';
 
 export default function CustomControl() {
   return (
@@ -7,7 +8,7 @@ export default function CustomControl() {
       style={[
         videoPlayerStyles.animatedView,
         {
-          backgroundColor: playPause ? 'rgba(52, 52, 52, 0.5)' : 'transparent',
+          backgroundColor: playPause ? colors.lightDark : colors.transparent,
           opacity: animationRef,
         },
       ]}>

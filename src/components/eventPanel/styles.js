@@ -1,4 +1,5 @@
 import {StyleSheet} from 'react-native';
+import colors from '../../utils/colors';
 import { normalize } from '../../utils/dimensions';
 
 export const eventPanelStyles = StyleSheet.create({
@@ -16,10 +17,10 @@ export const eventPanelStyles = StyleSheet.create({
   },
 
   desc: {
-    textAlign: 'center',
-    fontSize: 12,
-    color: 'grey',
     fontWeight: '600',
+    color: colors.grey,
+    textAlign: 'center',
+    fontSize: normalize(12),
   },
 
   container: {alignItems: 'center'}, 

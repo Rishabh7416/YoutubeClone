@@ -1,8 +1,15 @@
 import React from 'react';
-import Slider from '@react-native-community/slider';
+import colors from '../../utils/colors';
 import localImages from '../../utils/localImages';
+import Slider from '@react-native-community/slider';
 
 const SliderBar = ({...props}) => {
+
+  /**
+   * 
+   * @param {*} value 
+   * @return the callback with time value
+   */
   const propCallbackHandler = value => {
     props.onValuesChange(value);
   };
@@ -10,16 +17,16 @@ const SliderBar = ({...props}) => {
   return (
     <Slider
       step={1}
-      minimumValue={0}
       tapToSeek={true}
-      thumbTintColor="grey"
+      minimumValue={0}
       value={props.progress}
+      thumbTintColor={colors.grey}
       maximumValue={props.duration}
       style={props.sliderContainer}
-      minimumTrackTintColor={'white'}
-      maximumTrackTintColor={'darkgrey'}
       onValueChange={propCallbackHandler}
       thumbImage={localImages.thumbImage}
+      minimumTrackTintColor={colors.white}
+      maximumTrackTintColor={colors.darkerGrey}
     />
   );
 };

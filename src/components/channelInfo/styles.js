@@ -1,13 +1,14 @@
 import {StyleSheet} from 'react-native';
-import { normalize, vh, vw } from '../../utils/dimensions';
+import colors from '../../utils/colors';
+import {normalize, vh, vw} from '../../utils/dimensions';
 
 export const channelInfoStyles = StyleSheet.create({
   container: {
-    borderColor: 'grey',
     borderTopWidth: 0.4,
     alignItems: 'center',
     height: normalize(80),
     borderBottomWidth: 0.4,
+    borderColor: colors.grey,
     justifyContent: 'center',
   },
 
@@ -31,67 +32,74 @@ export const channelInfoStyles = StyleSheet.create({
   },
 
   channelName: {
-    color: 'black',
     fontWeight: 'bold',
+    color: colors.black,
     fontSize: normalize(14),
   },
 
   containerStyle: {
-    backgroundColor: '#50E2E1',
     width: '35%',
+    backgroundColor: colors.uniqueBlue,
   },
 
   titleStyle: {
-    color: 'white',
     fontWeight: 'bold',
+    color: colors.white,
   },
 
   userInfo: {
+    width: '49%',
+    alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'center',
-    width: '49%',
   },
 
-  commentCountStyle: {color: 'darkgrey', fontSize: normalize(12)},
+  commentCountStyle: {
+    color: colors.darkerGrey,
+    fontSize: normalize(12)
+  },
 
   commentStyle: {
-    width: 290,
-    marginLeft: normalize(12),
-    fontSize: normalize(12),
-    color: '#636363',
+    width: '78%',
     fontWeight: '400',
+    color: colors.dark,
+    fontSize: normalize(12),
+    marginLeft: normalize(12),
     lineHeight: normalize(17),
     marginVertical: normalize(10),
   },
 
   commentTextStyle: {
-    color: 'black',
+    color: colors.black,
     fontWeight: '600',
     fontSize: normalize(12),
   },
 
   commentUserStyle: {
-    position: 'absolute',
     top: 0,
     right: 0,
-    height: normalize(18),
     width: normalize(11),
-    // backgroundColor: 'red',
+    position: 'absolute',
+    height: normalize(18),
   },
 
   commentContainer: {
-    borderBottomWidth: 0.4,
-    borderColor: 'grey',
     width: '100%',
     alignSelf: 'center',
+    borderBottomWidth: 0.4,
+    borderColor: colors.grey,
     paddingVertical: normalize(10),
     paddingHorizontal: normalize(22),
-    // backgroundColor: 'red'
   },
 
   lowerContainer: {
     flexDirection: 'row',
     alignItems: 'center',
+  },
+
+  subscribe: {
+    fontSize: normalize(12),
+    fontWeight: '600',
+    color: colors.darker,
   },
 });

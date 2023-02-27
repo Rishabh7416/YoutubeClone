@@ -1,4 +1,5 @@
 import {StyleSheet} from 'react-native';
+import colors from '../../utils/colors';
 import {normalize, vh, vw} from '../../utils/dimensions';
 
 export const customCardStyle = StyleSheet.create({
@@ -20,33 +21,32 @@ export const customCardStyle = StyleSheet.create({
   innerContainer: {
     flex: 0.4,
     padding: normalize(15),
-    backgroundColor: 'white',
+    backgroundColor: colors.white,
     justifyContent: 'flex-end',
     borderBottomLeftRadius: normalize(10),
     borderBottomRightRadius: normalize(10),
   },
 
   channelName: {
-    color: 'darkgrey',
+    color: colors.darkerGrey,
     fontWeight: '600',
     marginLeft: normalize(10),
   },
-
+  
   imageStyle: {
     width: normalize(30),
     height: normalize(30),
-    // backgroundColor: 'red',
     borderRadius: normalize(50),
   },
-
+  
   lowerContainer: {
     alignItems: 'center',
     flexDirection: 'row',
   },
-
+  
   viewCountStyle: {
-    color: 'darkgrey',
     fontWeight: '600',
+    color: colors.darkerGrey,
     marginVertical: normalize(10),
   },
 
@@ -57,8 +57,8 @@ export const customCardStyle = StyleSheet.create({
     borderRadius: normalize(10),
   },
   titlestyle: {
-    color: 'black',
     fontWeight: '500',
+    color: colors.black,
     fontSize: normalize(16),
   },
 
@@ -87,30 +87,32 @@ export const customCardStyle = StyleSheet.create({
   shimmerSecondContainer:{
     alignItems: 'center',
     height: normalize(50),
-    justifyContent: 'center',
-    borderRadius: normalize(10),
-    marginLeft: normalize(12),
     marginTop: normalize(10),
+    justifyContent: 'center',
+    marginLeft: normalize(12),
+    borderRadius: normalize(10),
   },
 
   shimmerThirdContainer: {
     alignItems: 'center',
-    height: normalize(32),
     width: normalize(32),
+    height: normalize(32),
     justifyContent: 'center',
-    borderRadius: normalize(50),
-    marginLeft: normalize(14),
     marginTop: normalize(10),
+    marginLeft: normalize(14),
+    borderRadius: normalize(50),
   },
 
   shimmerFourthContainer: {
     alignItems: 'center',
     height: normalize(32),
     justifyContent: 'center',
-    borderRadius: normalize(10),
-    marginLeft: normalize(10),
     marginTop: normalize(10),
+    marginLeft: normalize(10),
+    borderRadius: normalize(10),
   },
 
-  shimmerContainer: {position: 'absolute'}
+  shimmerContainer: {
+    position: 'absolute'
+  }
 });
