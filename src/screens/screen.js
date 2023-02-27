@@ -7,7 +7,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import VideoPlayer from '../components/video/videoPlayer';
 import VideoInfo from '../components/videoInfo/videoInfo';
 import EventPanel from '../components/eventPanel/eventPanel';
-import {View, FlatList, TouchableOpacity} from 'react-native';
+import {View, FlatList, Text, TouchableOpacity} from 'react-native';
 import ChannelInfo from '../components/channelInfo/channelInfo';
 
 export default function Screen() {
@@ -35,6 +35,7 @@ export default function Screen() {
           channelName={'Technical Guruji'}
           channelIcon={payload.thumb}
         />
+        <Text style={screenStyle.similarVideoText}>Similar Videos</Text>
       </React.Fragment>
     );
   };

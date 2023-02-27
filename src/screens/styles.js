@@ -19,4 +19,11 @@ export const screenStyle = StyleSheet.create({
   renderContainer: {
     marginTop: normalize(25),
   },
+
+  similarVideoText: {
+    fontWeight: 'bold',
+    fontSize: normalize(20),
+    marginTop: normalize(30),
+    marginLeft: normalize(20),
+  },
 });
