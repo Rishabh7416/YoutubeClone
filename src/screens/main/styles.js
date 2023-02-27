@@ -1,25 +1,30 @@
 import {StyleSheet} from 'react-native';
+import colors from '../../utils/colors';
 import {normalize, vh} from '../../utils/dimensions';
 
 export const mainScreenStyle = StyleSheet.create({
+  mainContainer: {
+    backgroundColor: colors.white,
+  },
+
   buttonContainer: {
     width: vh(100),
     height: normalize(35),
     justifyContent: 'center',
-    backgroundColor: '#50E2E1',
     borderRadius: normalize(20),
+    backgroundColor: colors.uniqueBlue,
   },
 
   buttonContainerChange: {
-    height: normalize(35),
     width: vh(90),
+    height: normalize(35),
     justifyContent: 'center',
   },
 
   titleStyle: {
-    color: 'white',
     fontWeight: '700',
     textAlign: 'center',
+    color: colors.white,
     fontSize: normalize(14),
   },
 
@@ -29,14 +34,16 @@ export const mainScreenStyle = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     height: normalize(68),
-    backgroundColor: 'white',
     borderRadius: normalize(20),
+    backgroundColor: colors.white,
     justifyContent: 'space-between',
   },
 
   contentContainerStyle: {
-    backgroundColor: '#F2F8F8',
+    backgroundColor: colors.lightBlue,
   },
 
-  container: {backgroundColor: 'white'}
+  container: {
+    backgroundColor: colors.white,
+  },
 });

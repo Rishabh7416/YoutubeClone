@@ -3,6 +3,7 @@ export default {
   white: 'white',
   black: 'black',
   dark: '#636363',
+  lightBlue: '#F2F8F8',
   uniqueBlue: '#50E2E1',
   darkerGrey: 'darkgrey',
   transparent: 'transparent',

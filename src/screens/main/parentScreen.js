@@ -2,14 +2,14 @@ import {
   View,
   Text,
   FlatList,
+  NativeModules,
   TouchableOpacity,
   ActivityIndicator,
-  NativeModules,
-  StatusBar,
 } from 'react-native';
 import React from 'react';
 import dataMap from './dataMap';
 import {useDispatch} from 'react-redux';
+import colors from '../../utils/colors';
 import {mainScreenStyle} from './styles';
 import mockData from '../../utils/mockData';
 import Card from '../../components/customCards/card';
@@ -124,7 +124,7 @@ export default function ParentScreen() {
               style={
                 currIndex === index
                   ? mainScreenStyle.titleStyle
-                  : [mainScreenStyle.titleStyle, {color: 'grey'}]
+                  : [mainScreenStyle.titleStyle, {color: colors.grey}]
               }>
               {item.title}
             </Text>
@@ -135,7 +135,7 @@ export default function ParentScreen() {
   );
 
   return (
-    <View style={{paddingTop: HEIGHT, backgroundColor: 'white'}}>
+    <View style={[mainScreenStyle.mainContainer, {paddingTop: HEIGHT}]}>
       <FlatList
         bounces={false}
         data={flatlistData}

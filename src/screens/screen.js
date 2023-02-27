@@ -1,6 +1,7 @@
 import React from 'react';
 import {screenStyle} from './styles';
 import mockData from '../utils/mockData';
+import {useRoute} from '@react-navigation/native';
 import Card from '../components/customCards/card';
 import {useDispatch, useSelector} from 'react-redux';
 import VideoPlayer from '../components/video/videoPlayer';
@@ -8,7 +9,6 @@ import VideoInfo from '../components/videoInfo/videoInfo';
 import EventPanel from '../components/eventPanel/eventPanel';
 import {View, FlatList, TouchableOpacity} from 'react-native';
 import ChannelInfo from '../components/channelInfo/channelInfo';
-import {useIsFocused, useRoute} from '@react-navigation/native';
 
 export default function Screen() {
   const route = useRoute();
@@ -73,10 +73,7 @@ export default function Screen() {
   const _renderItem = React.useCallback(({item}) => {
     return (
       <TouchableOpacity onPress={() => onPressEvent(item)} activeOpacity={0.9}>
-        <Card
-          title={item.title}
-          thumbnail={item.thumb}
-        />
+        <Card title={item.title} thumbnail={item.thumb} />
       </TouchableOpacity>
     );
   }, []);
