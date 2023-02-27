@@ -1,30 +1,57 @@
+import {
+  View,
+  Text,
+  FlatList,
+  TouchableOpacity,
+  ActivityIndicator,
+  NativeModules,
+  StatusBar,
+} from 'react-native';
 import React from 'react';
+import dataMap from './dataMap';
 import {useDispatch} from 'react-redux';
 import {mainScreenStyle} from './styles';
 import mockData from '../../utils/mockData';
 import Card from '../../components/customCards/card';
-import {normalize, vh} from '../../utils/dimensions';
 import {useNavigation} from '@react-navigation/native';
-import {View, Text, FlatList, TouchableOpacity} from 'react-native';
+import ShimmerComponent from '../../components/customShimmer/shimmerComponent';
 
 export default function ParentScreen() {
+  const emptyData = [''];
   const dispatch = useDispatch();
   const navigation = useNavigation();
-  const [currIndex, setCurrIndex] = React.useState(0);
-
+  const [page, setPage] = React.useState(1);
+  const _data = mockData.categories[0].videos;
+  const [loader, setLoader] = React.useState(false);
   const currentItemIn = index => setCurrIndex(index);
+  const [currIndex, setCurrIndex] = React.useState(1);
+  const {HEIGHT} = NativeModules?.StatusBarManager;
 
-  const _renderItem = ({item, index}) => {
+  /**
+   *
+   * @param {*} item
+   * @param {*} index
+   */
+  const cardAction = (item, index) => {
+    dispatch({type: 'INFO', payload: item});
+    navigation.navigate('screen', {currentIndex: index});
+  };
+
+  /**
+   *
+   */
+  React.useEffect(() => {
+    setLoader(false);
+  }, [page]);
+
+  const _renderItem = React.useCallback(({item, index}) => {
     switch (currIndex) {
       case 0:
       case 1:
         return (
           <TouchableOpacity
             activeOpacity={0.7}
-            onPress={() => {
-              dispatch({type: 'INFO', payload: item});
-              navigation.navigate('screen', {currentIndex: index});
-            }}>
+            onPress={() => cardAction(item, index)}>
             <Card
               title={item.title}
               thumbnail={item.thumb}
@@ -34,67 +61,93 @@ export default function ParentScreen() {
         );
       case 2:
     }
-  };
+  }, []);
 
+  /**
+   *
+   * @returns different data
+   */
+  const _paginationData = page == 1 ? _data.slice(0, 5) : _data;
   const data = () => {
     switch (currIndex) {
       case 0:
-        return [''];
+        return emptyData;
       case 1:
-        return mockData.categories[0].videos;
+        return _paginationData;
       case 2:
-        return [''];
+        return emptyData;
+    }
+  };
+  const flatlistData = data();
+
+  /**
+   *
+   */
+  const _onEndReached = () => {
+    if (page < 2) {
+      setLoader(true);
+      setTimeout(() => setPage(prev => prev + 1), 1000);
     }
   };
 
-  const flatlistData = data();
+  /**
+   *
+   * @returns loader
+   */
+  const _listFooterComponent = () => (
+    <ActivityIndicator animating={loader} size="large" />
+  );
 
-  const topBar = () => (
-    <View style={{backgroundColor: 'white'}}>
+  /**
+   *
+   * @returns shimmer
+   */
+  const listEmpty = () => <ShimmerComponent />;
+
+  /**
+   *
+   * @returns
+   */
+  const TopBar = () => (
+    <View style={mainScreenStyle.container}>
       <View style={mainScreenStyle.contentStyle}>
-        {[{title: 'Channel'}, {title: 'Videos'}, {title: 'Articles'}].map(
-          (item, index) => {
-            return (
-              <TouchableOpacity
-                key={index}
-                onPress={() => currentItemIn(index)}
-                style={
-                  currIndex === index
-                    ? mainScreenStyle.buttonContainer
-                    : {
-                        height: normalize(35),
-                        width: vh(90),
-                        justifyContent: 'center',
-                      }
-                }>
-                <Text
-                  style={
-                    currIndex === index
-                      ? mainScreenStyle.titleStyle
-                      : [mainScreenStyle.titleStyle, {color: 'grey'}]
-                  }>
-                  {item.title}
-                </Text>
-              </TouchableOpacity>
-            );
-          },
-        )}
+        {dataMap.map((item, index) => (
+          <TouchableOpacity
+            key={index}
+            onPress={() => currentItemIn(index)}
+            style={
+              currIndex === index
+                ? mainScreenStyle.buttonContainer
+                : mainScreenStyle.buttonContainerChange
+            }>
+            <Text
+              style={
+                currIndex === index
+                  ? mainScreenStyle.titleStyle
+                  : [mainScreenStyle.titleStyle, {color: 'grey'}]
+              }>
+              {item.title}
+            </Text>
+          </TouchableOpacity>
+        ))}
       </View>
     </View>
   );
 
-  const listEmpty = () => <ShimmerComponent />;
-
   return (
-    <FlatList
-      bounces={false}
-      data={flatlistData}
-      renderItem={_renderItem}
-      stickyHeaderIndices={[0]}
-      ListHeaderComponent={topBar}
-      ListEmptyComponent={listEmpty}
-      showsVerticalScrollIndicator={false}
-      contentContainerStyle={mainScreenStyle.contentContainerStyle}
-    />
+    <View style={{paddingTop: HEIGHT, backgroundColor: 'white'}}>
+      <FlatList
+        bounces={false}
+        data={flatlistData}
+        renderItem={_renderItem}
+        stickyHeaderIndices={[0]}
+        onEndReached={_onEndReached}
+        ListHeaderComponent={TopBar}
+        ListEmptyComponent={listEmpty}
+        showsVerticalScrollIndicator={false}
+        ListFooterComponent={_listFooterComponent}
+        contentContainerStyle={mainScreenStyle.contentContainerStyle}
+      />
+    </View>
   );
 }

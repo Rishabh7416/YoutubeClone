@@ -1,3 +1,4 @@
+import {Animated} from 'react-native';
 import Share from 'react-native-share';
 
 const Sharing = (url, successCallback, failureCallback) => {
@@ -8,6 +9,15 @@ const Sharing = (url, successCallback, failureCallback) => {
     .catch(error => failureCallback(error));
 };
 
+const showMoreLess = (ref, state) => {
+  Animated.timing(ref, {
+    toValue: state ? 0 : 1,
+    duration: 500,
+    useNativeDriver: true,
+  }).start();
+};
+
 export const commonFunctions = {
   ShareContent: Sharing,
+  showAnimation: showMoreLess,
 };

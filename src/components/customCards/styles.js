@@ -35,7 +35,7 @@ export const customCardStyle = StyleSheet.create({
   imageStyle: {
     width: normalize(30),
     height: normalize(30),
-    backgroundColor: 'red',
+    // backgroundColor: 'red',
     borderRadius: normalize(50),
   },
 
@@ -75,4 +75,42 @@ export const customCardStyle = StyleSheet.create({
     width: normalize(20),
     height: normalize(20),
   },
+
+  shimmerFirstContainer: {
+    alignItems: 'center',
+    height: normalize(190),
+    justifyContent: 'center',
+    borderTopLeftRadius: normalize(10),
+    borderTopRightRadius: normalize(10),
+  },
+
+  shimmerSecondContainer:{
+    alignItems: 'center',
+    height: normalize(50),
+    justifyContent: 'center',
+    borderRadius: normalize(10),
+    marginLeft: normalize(12),
+    marginTop: normalize(10),
+  },
+
+  shimmerThirdContainer: {
+    alignItems: 'center',
+    height: normalize(32),
+    width: normalize(32),
+    justifyContent: 'center',
+    borderRadius: normalize(50),
+    marginLeft: normalize(14),
+    marginTop: normalize(10),
+  },
+
+  shimmerFourthContainer: {
+    alignItems: 'center',
+    height: normalize(32),
+    justifyContent: 'center',
+    borderRadius: normalize(10),
+    marginLeft: normalize(10),
+    marginTop: normalize(10),
+  },
+
+  shimmerContainer: {position: 'absolute'}
 });

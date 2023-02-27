@@ -31,10 +31,10 @@ export const BANNER = {
 export default {
   vh,
   vw,
+  BANNER,
   normalize,
   DESIGN_HEIGHT,
   DESIGN_WIDTH,
   SCREEN_WIDTH,
   SCREEN_HEIGHT,
-  BANNER,
 };

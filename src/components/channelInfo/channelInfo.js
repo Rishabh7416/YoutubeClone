@@ -28,7 +28,7 @@ export default function ChannelInfo({...props}) {
                   {
                     fontSize: normalize(12),
                     fontWeight: '600',
-                    color: 'darkgrey',
+                    color: '#rgb(103,103,104)',
                   },
                 ]}>
                 {props.subscribers}
@@ -36,7 +36,7 @@ export default function ChannelInfo({...props}) {
             </View>
           </View>
           <CustomButton
-            title={'Subscriber'}
+            title={'Subscribe'}
             titleStyle={channelInfoStyles.titleStyle}
             containerStyle={channelInfoStyles.containerStyle}
           />

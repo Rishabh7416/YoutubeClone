@@ -59,7 +59,7 @@ export const channelInfoStyles = StyleSheet.create({
     width: 290,
     marginLeft: normalize(12),
     fontSize: normalize(12),
-    color: 'darkgrey',
+    color: '#636363',
     fontWeight: '400',
     lineHeight: normalize(17),
     marginVertical: normalize(10),

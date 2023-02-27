@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-import { normalize } from '../../utils/dimensions';
+import {normalize, SCREEN_HEIGHT, SCREEN_WIDTH} from '../../utils/dimensions';
 
 export const videoPlayerStyles = StyleSheet.create({
   container: {
@@ -22,7 +22,11 @@ export const videoPlayerStyles = StyleSheet.create({
     },
   },
 
-  videoContainer: {flex: 1},
+  videoContainer: {
+    width: SCREEN_WIDTH,
+    backgroundColor: 'black',
+    height: SCREEN_HEIGHT / 3.4,
+  },
 
   animatedView: {
     top: 0,
@@ -30,5 +34,55 @@ export const videoPlayerStyles = StyleSheet.create({
     right: 0,
     bottom: 0,
     position: 'absolute',
+  },
+
+  sliderContainer: {
+    width: '100%',
+    position: 'absolute',
+    bottom: normalize(15),
+  },
+
+  timingStyle: {
+    fontSize: normalize(11),
+    color: 'white',
+    fontWeight: '600',
+    letterSpacing: 0.1,
+  },
+
+  icon: {
+    right: 0,
+    position: 'absolute',
+    bottom: normalize(2),
+  },
+
+  lowerControlStyle: {
+    width: '90%',
+    alignSelf: 'center',
+    position: 'absolute',
+    flexDirection: 'row',
+    bottom: normalize(10),
+  },
+
+  loadingIndicator: {
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    position: 'absolute',
+  },
+
+  controlMainContainer: {
+    width: '100%',
+  },
+
+  backIconContainerStyle: {
+    top: '16%',
+    left: '6%',
+    position: 'absolute',
+  },
+
+  backIcon: {
+    width: normalize(25),
+    height: normalize(25),
   },
 });

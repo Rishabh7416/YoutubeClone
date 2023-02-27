@@ -10,6 +10,12 @@ export const mainScreenStyle = StyleSheet.create({
     borderRadius: normalize(20),
   },
 
+  buttonContainerChange: {
+    height: normalize(35),
+    width: vh(90),
+    justifyContent: 'center',
+  },
+
   titleStyle: {
     color: 'white',
     fontWeight: '700',
@@ -21,7 +27,8 @@ export const mainScreenStyle = StyleSheet.create({
     width: '80%',
     alignSelf: 'center',
     flexDirection: 'row',
-    height: normalize(50),
+    alignItems: 'center',
+    height: normalize(68),
     backgroundColor: 'white',
     borderRadius: normalize(20),
     justifyContent: 'space-between',
@@ -30,4 +37,6 @@ export const mainScreenStyle = StyleSheet.create({
   contentContainerStyle: {
     backgroundColor: '#F2F8F8',
   },
+
+  container: {backgroundColor: 'white'}
 });

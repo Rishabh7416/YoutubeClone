@@ -11,7 +11,6 @@ import {View, Text, Image, FlatList, TouchableOpacity} from 'react-native';
  * @returns EventPanel
  */
 export default React.memo(function EventPanel({...props}) {
-
   const {payload} = useSelector(store => store.informationReducer);
   const urlForShare = payload.sources[0];
 
@@ -67,6 +66,8 @@ export default React.memo(function EventPanel({...props}) {
     }
   };
 
+  const keyExtractor = (item, index) => `${item.id}-${index}`;
+
   return (
     <View style={[eventPanelStyles.container, props.panelStyle]}>
       <FlatList
@@ -75,8 +76,8 @@ export default React.memo(function EventPanel({...props}) {
         scrollEnabled={false}
         data={eventPanelData}
         renderItem={_renderitem}
+        keyExtractor={keyExtractor}
         showsHorizontalScrollIndicator={false}
-        keyExtractor={(item, index) => `${item.id}-${index}`}
         contentContainerStyle={eventPanelStyles.contentContainerStyle}
       />
     </View>
