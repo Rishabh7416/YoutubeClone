@@ -19,8 +19,8 @@ import {useIsFocused, useNavigation} from '@react-navigation/native';
 
 const VideoPlayer = ({...props}) => {
   const rnVidRef = React.useRef(null);
-  const currentFocusedScreen = useIsFocused();
   const [skip, setSkip] = React.useState(0);
+  const currentFocusedScreen = useIsFocused();
   const [playPause, setPlayPause] = React.useState(false);
   const [videoDuration, setVideoDuration] = React.useState(0);
   const [currentProgress, setCurrentProgress] = React.useState(0);
@@ -34,25 +34,39 @@ const VideoPlayer = ({...props}) => {
   const animationRef = React.useRef(new Animated.Value(1)).current;
 
   /**
-   *
+   * styling object to handle landscape and portrait at one place only
    */
-  React.useEffect(() => {
-    setPlayPause(false);
-  }, [props.vid]);
+  const changeStyle = {
+    lanscape: {
+      height: SCREEN_WIDTH,
+      width: SCREEN_HEIGHT,
+      backgroundColor: colors.black,
+    },
+    portrait: videoPlayerStyles.videoContainer,
+  };
 
   React.useEffect(() => {
-    Orientation.getOrientation(value => {
-      const state = value.includes('LANDSCAPE');
-      state && Orientation.lockToPortrait();
+    setPlayPause(false);
+  }, [props.videos]);
+
+  React.useEffect(() => {
+    Orientation.addDeviceOrientationListener(value => {
+      const state = value === 'PORTRAIT';
+      state
+        ? setOrientationStyle(changeStyle.portrait)
+        : setOrientationStyle(changeStyle.lanscape);
+      Orientation.unlockAllOrientations();
     });
-    Orientation.addLockListener(value => setOrientationState(value));
     return () => {
-      Orientation.removeLockListener(orientationHandler);
+      Orientation.removeDeviceOrientationListener(value => {
+        const state = value === 'PORTRAIT';
+        state && setOrientationStyle(changeStyle.portrait);
+      });
     };
   }, []);
 
   /**
-   *
+   * true or false state for the play n pause
    */
   const playPauseStatus = playPause || !currentFocusedScreen;
 
@@ -92,6 +106,9 @@ const VideoPlayer = ({...props}) => {
    */
   const currentTimeFunc = ({currentTime}) => {
     setCurrentProgress(currentTime);
+    if (Math.round(videoDuration.duration) == Math.round(currentTime)) {
+      setPlayPause(true);
+    }
   };
 
   /**
@@ -126,15 +143,22 @@ const VideoPlayer = ({...props}) => {
     clearTimeout(hide);
   };
 
+  /**
+   *
+   * @param {*} param0
+   * buffering state handler
+   */
   const buffering = ({isBuffering}) => {
     setBuffer(isBuffering);
   };
 
   const onVal = value => {
     rnVidRef?.current?.seek(value);
-    console.log(value);
   };
 
+  /**
+   * handling the orientation of the video player
+   */
   const orientationHandler = () => {
     const state = orientationState.includes('LANDSCAPE');
     if (state) {
@@ -168,7 +192,7 @@ const VideoPlayer = ({...props}) => {
           onLoadStart={loadStart}
           paused={playPauseStatus}
           style={orientationStyle}
-          source={{uri: props.vid}}
+          source={{uri: props?.videos}}
           onProgress={currentTimeFunc}
         />
         {buffer ? (
@@ -249,7 +273,6 @@ const VideoPlayer = ({...props}) => {
               </TouchableOpacity>
             </View>
           </Animated.View>
-          // <CustomControl container = {videoPlayerStyles.animatedView} />
         )}
       </TouchableOpacity>
     </View>

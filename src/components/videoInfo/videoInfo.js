@@ -2,12 +2,17 @@ import React from 'react';
 import {videoInfoStyles} from './styles';
 import {normalize} from '../../utils/dimensions';
 import {View, Text, Animated, ScrollView} from 'react-native';
+import {useSelector} from 'react-redux';
 
 export default function VideoInfo({...props}) {
   const scrollingToTop = React.useRef(null);
   const [show, setShow] = React.useState(false);
   const [textLines, setTextLines] = React.useState(1);
   const animatingRef = React.useRef(new Animated.Value(0)).current;
+
+  const {mode} = useSelector(state => state.themeReducer);
+
+  const modeState = mode == 'light';
 
   const startingValue = () => (textLines === 1 ? normalize(30) : normalize(34));
 
@@ -16,7 +21,7 @@ export default function VideoInfo({...props}) {
    */
   const interpolating = animatingRef.interpolate({
     inputRange: [0, 1],
-    outputRange: [startingValue(), normalize(17) * textLines],
+    outputRange: [startingValue(), normalize(20) * textLines],
   });
 
   /**
@@ -52,9 +57,16 @@ export default function VideoInfo({...props}) {
     setTextLines(e.nativeEvent.lines.length);
   };
 
+  const styles = videoInfoStyles;
+
   return (
     <View style={videoInfoStyles.container}>
-      <Text style={videoInfoStyles.titleStyle}>{props.title}</Text>
+      <Text
+        style={
+          modeState ? styles.titleStyle.lightMode : styles.titleStyle.darkMode
+        }>
+        {props.title}
+      </Text>
       <Text
         style={videoInfoStyles.viewersStyle}>{`94k views . 3 days ago`}</Text>
       <Animated.View style={[videoInfoStyles.box, animatedHeight]}>
@@ -65,7 +77,11 @@ export default function VideoInfo({...props}) {
           showsVerticalScrollIndicator={false}>
           <Text
             onTextLayout={findTextLines}
-            style={videoInfoStyles.desciptionStyle}>
+            style={
+              modeState
+                ? styles.desciptionStyle.lightMode
+                : styles.desciptionStyle.darkMode
+            }>
             {props.desc}
           </Text>
         </ScrollView>

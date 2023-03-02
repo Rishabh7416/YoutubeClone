@@ -4,15 +4,25 @@ import {View, Text, Image} from 'react-native';
 import {normalize} from '../../utils/dimensions';
 import CustomButton from '../customButton/customButton';
 import localImages from '../../utils/localImages';
+import {useSelector} from 'react-redux';
 
 /**
  *
  * @returns channelInfo
  */
 export default function ChannelInfo({...props}) {
+  const {mode} = useSelector(state => state.themeReducer);
+
+  const styles = channelInfoStyles;
+
+  const modeState = mode == 'light';
+
   return (
     <React.Fragment>
-      <View style={channelInfoStyles.container}>
+      <View
+        style={
+          modeState ? styles.container.lightMode : styles.container.darkMode
+        }>
         <View style={channelInfoStyles.innerContainer}>
           <View style={channelInfoStyles.userInfo}>
             <Image
@@ -20,7 +30,12 @@ export default function ChannelInfo({...props}) {
               style={channelInfoStyles.imageStyle}
             />
             <View style={channelInfoStyles.channelStyle}>
-              <Text style={channelInfoStyles.channelName}>
+              <Text
+                style={
+                  modeState
+                    ? styles.channelName.lightMode
+                    : styles.channelName.darkMode
+                }>
                 {props.channelName}
               </Text>
               <Text style={channelInfoStyles.subscribe}>
@@ -41,7 +56,12 @@ export default function ChannelInfo({...props}) {
             style={channelInfoStyles.commentUserStyle}
             source={localImages.expandCommentIcon}
           />
-          <Text style={channelInfoStyles.commentTextStyle}>
+          <Text
+            style={
+              modeState
+                ? styles.commentTextStyle.lightMode
+                : styles.commentTextStyle.darkMode
+            }>
             {'Comments'}
             <Text style={channelInfoStyles.commentCountStyle}>{'  32'}</Text>
           </Text>
@@ -54,7 +74,13 @@ export default function ChannelInfo({...props}) {
               {height: normalize(25), width: normalize(25)},
             ]}
           />
-          <Text style={channelInfoStyles.commentStyle} numberOfLines={2}>
+          <Text
+            style={
+              modeState
+                ? styles.commentStyle.lightMode
+                : styles.commentStyle.darkMode
+            }
+            numberOfLines={2}>
             RishabhRishabhRishabhRishabhRishabhRishabhRishabhRishabhRishabhRishabhRishabhsdkjnfkjebkjsbgkjsbkgjbsdkjbgkjsdbkk
           </Text>
         </View>

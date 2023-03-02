@@ -19,17 +19,17 @@ export default React.memo(function EventPanel({...props}) {
    * @param {*} param0
    * @returns
    */
-  const _renderitem = ({item, index}) => {
+  const _renderitem = React.useCallback(({item, index}) => {
     return (
       <TouchableOpacity
         activeOpacity={0.7}
         onPress={() => actionOnButton(index)}
         style={eventPanelStyles.renderItemStyle}>
-        <Image source={item.icon} />
+        <Image source={item.icon} style={eventPanelStyles.eventPanelIcons} />
         <Text style={eventPanelStyles.desc}>{item.description}</Text>
       </TouchableOpacity>
     );
-  };
+  }, []);
 
   /**
    * sharingAction
@@ -66,6 +66,12 @@ export default React.memo(function EventPanel({...props}) {
     }
   };
 
+  /**
+   *
+   * @param {*} item
+   * @param {*} index
+   * @returns unique indentity to the items
+   */
   const keyExtractor = (item, index) => `${item.id}-${index}`;
 
   return (

@@ -1,6 +1,6 @@
 import {StyleSheet} from 'react-native';
 import colors from '../../utils/colors';
-import { normalize } from '../../utils/dimensions';
+import {normalize} from '../../utils/dimensions';
 
 export const eventPanelStyles = StyleSheet.create({
   contentContainerStyle: {
@@ -23,5 +23,13 @@ export const eventPanelStyles = StyleSheet.create({
     fontSize: normalize(12),
   },
 
-  container: {alignItems: 'center'}, 
+  container: {
+    alignItems: 'center',
+  },
+
+  eventPanelIcons: {
+    width: normalize(23),
+    resizeMode: 'contain',
+    height: normalize(23),
+  },
 });

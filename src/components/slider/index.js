@@ -25,8 +25,8 @@ const SliderBar = ({...props}) => {
       style={props.sliderContainer}
       onValueChange={propCallbackHandler}
       thumbImage={localImages.thumbImage}
-      minimumTrackTintColor={colors.white}
       maximumTrackTintColor={colors.darkerGrey}
+      minimumTrackTintColor={colors.uniqueBlue}
     />
   );
 };

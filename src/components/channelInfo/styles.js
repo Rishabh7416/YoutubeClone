@@ -4,12 +4,22 @@ import {normalize, vh, vw} from '../../utils/dimensions';
 
 export const channelInfoStyles = StyleSheet.create({
   container: {
-    borderTopWidth: 0.4,
-    alignItems: 'center',
-    height: normalize(80),
-    borderBottomWidth: 0.4,
-    borderColor: colors.grey,
-    justifyContent: 'center',
+    lightMode: {
+      borderTopWidth: 0.4,
+      alignItems: 'center',
+      height: normalize(80),
+      borderBottomWidth: 0.4,
+      borderColor: colors.grey,
+      justifyContent: 'center',
+    },
+    darkMode: {
+      borderTopWidth: 0.4,
+      alignItems: 'center',
+      height: normalize(80),
+      borderBottomWidth: 0.4,
+      borderColor: colors.grey,
+      justifyContent: 'center',
+    },
   },
 
   innerContainer: {
@@ -32,9 +42,16 @@ export const channelInfoStyles = StyleSheet.create({
   },
 
   channelName: {
-    fontWeight: 'bold',
-    color: colors.black,
-    fontSize: normalize(14),
+    lightMode: {
+      fontWeight: 'bold',
+      color: colors.black,
+      fontSize: normalize(14),
+    },
+    darkMode: {
+      fontWeight: 'bold',
+      color: colors.white,
+      fontSize: normalize(14),
+    },
   },
 
   containerStyle: {
@@ -56,23 +73,41 @@ export const channelInfoStyles = StyleSheet.create({
 
   commentCountStyle: {
     color: colors.darkerGrey,
-    fontSize: normalize(12)
+    fontSize: normalize(12),
   },
 
   commentStyle: {
-    width: '78%',
-    fontWeight: '400',
-    color: colors.dark,
-    fontSize: normalize(12),
-    marginLeft: normalize(12),
-    lineHeight: normalize(17),
-    marginVertical: normalize(10),
+    lightMode: {
+      width: '78%',
+      fontWeight: '400',
+      color: colors.dark,
+      fontSize: normalize(12),
+      marginLeft: normalize(12),
+      lineHeight: normalize(17),
+      marginVertical: normalize(10),
+    },
+    darkMode: {
+      width: '78%',
+      fontWeight: '400',
+      color: colors.white,
+      fontSize: normalize(12),
+      marginLeft: normalize(12),
+      lineHeight: normalize(17),
+      marginVertical: normalize(10),
+    },
   },
 
   commentTextStyle: {
-    color: colors.black,
-    fontWeight: '600',
-    fontSize: normalize(12),
+    lightMode: {
+      color: colors.black,
+      fontWeight: '600',
+      fontSize: normalize(12),
+    },
+    darkMode: {
+      color: colors.white,
+      fontWeight: '600',
+      fontSize: normalize(12),
+    },
   },
 
   commentUserStyle: {

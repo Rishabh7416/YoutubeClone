@@ -4,7 +4,12 @@ import {normalize, vh} from '../../utils/dimensions';
 
 export const mainScreenStyle = StyleSheet.create({
   mainContainer: {
-    backgroundColor: colors.white,
+    lightMode: {
+      backgroundColor: colors.white,
+    },
+    darkMode: {
+      backgroundColor: colors.black,
+    },
   },
 
   buttonContainer: {
@@ -40,7 +45,12 @@ export const mainScreenStyle = StyleSheet.create({
   },
 
   contentContainerStyle: {
-    backgroundColor: colors.lightBlue,
+    lightMode: {
+      backgroundColor: colors.lightBlue,
+    },
+    darkMode: {
+      backgroundColor: colors.black,
+    },
   },
 
   container: {

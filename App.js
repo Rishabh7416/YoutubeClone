@@ -1,9 +1,8 @@
-import {View, Text, SafeAreaView, StyleSheet, StatusBar} from 'react-native';
 import React from 'react';
-import NewRouter from './src/router/newRoute';
-import {Provider} from 'react-redux';
 import {store} from './src/redux/store';
-import ShimmerComponent from './src/components/customShimmer/shimmerComponent';
+import NewRouter from './src/router/newRoute';
+import {Provider, useSelector} from 'react-redux';
+import {View, StyleSheet, StatusBar} from 'react-native';
 
 export default function App() {
   return (
@@ -13,7 +12,6 @@ export default function App() {
       </View>
       <Provider store={store}>
         <NewRouter />
-        {/* <ShimmerComponent/> */}
       </Provider>
     </View>
   );

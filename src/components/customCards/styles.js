@@ -4,18 +4,34 @@ import {normalize, vh, vw} from '../../utils/dimensions';
 
 export const customCardStyle = StyleSheet.create({
   container: {
-    width: '90%',
-    alignSelf: 'center',
-    marginTop: normalize(20),
-    borderRadius: normalize(10),
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 3,
+    lightMode: {
+      width: '90%',
+      alignSelf: 'center',
+      marginTop: normalize(20),
+      borderRadius: normalize(10),
+      shadowColor: '#000',
+      shadowOffset: {
+        width: 0,
+        height: 3,
+      },
+      shadowOpacity: 0.25,
+      shadowRadius: 8.3,
+      elevation: 8,
     },
-    shadowOpacity: 0.25,
-    shadowRadius: 8.3,
-    // elevation: 13,
+    darkMode: {
+      width: '90%',
+      alignSelf: 'center',
+      marginTop: normalize(20),
+      borderRadius: normalize(10),
+      shadowColor: colors.white,
+      shadowOffset: {
+        width: 0,
+        height: 3,
+      },
+      shadowOpacity: 0.55,
+      shadowRadius: 8.3,
+      elevation: 8,
+    },
   },
 
   innerContainer: {
@@ -32,18 +48,18 @@ export const customCardStyle = StyleSheet.create({
     fontWeight: '600',
     marginLeft: normalize(10),
   },
-  
+
   imageStyle: {
     width: normalize(30),
     height: normalize(30),
     borderRadius: normalize(50),
   },
-  
+
   lowerContainer: {
     alignItems: 'center',
     flexDirection: 'row',
   },
-  
+
   viewCountStyle: {
     fontWeight: '600',
     color: colors.darkerGrey,
@@ -84,7 +100,7 @@ export const customCardStyle = StyleSheet.create({
     borderTopRightRadius: normalize(10),
   },
 
-  shimmerSecondContainer:{
+  shimmerSecondContainer: {
     alignItems: 'center',
     height: normalize(50),
     marginTop: normalize(10),
@@ -113,6 +129,6 @@ export const customCardStyle = StyleSheet.create({
   },
 
   shimmerContainer: {
-    position: 'absolute'
-  }
+    position: 'absolute',
+  },
 });

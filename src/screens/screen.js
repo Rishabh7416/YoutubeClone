@@ -7,8 +7,8 @@ import {useDispatch, useSelector} from 'react-redux';
 import VideoPlayer from '../components/video/videoPlayer';
 import VideoInfo from '../components/videoInfo/videoInfo';
 import EventPanel from '../components/eventPanel/eventPanel';
-import {View, FlatList, Text, TouchableOpacity} from 'react-native';
 import ChannelInfo from '../components/channelInfo/channelInfo';
+import {View, FlatList, Text, TouchableOpacity} from 'react-native';
 
 export default function Screen() {
   const route = useRoute();
@@ -18,9 +18,13 @@ export default function Screen() {
   const flatlistData = mockData.categories[0].videos;
   const {payload} = useSelector(store => store.informationReducer);
   const videos = payload.sources[0];
+  const {mode} = useSelector(state => state.themeReducer);
+
+  const styles = screenStyle;
+
+  const modeState = mode == 'light';
 
   /**
-   *
    * @returns
    */
   const listHeader = () => {
@@ -35,13 +39,19 @@ export default function Screen() {
           channelName={'Technical Guruji'}
           channelIcon={payload.thumb}
         />
-        <Text style={screenStyle.similarVideoText}>Similar Videos</Text>
+        <Text
+          style={
+            modeState
+              ? styles.similarVideoText.lightMode
+              : styles.similarVideoText.darkMode
+          }>
+          {'Similar Videos'}
+        </Text>
       </React.Fragment>
     );
   };
 
   /**
-   *
    * @param {*} item
    */
   const onPressEvent = item => {
@@ -50,7 +60,7 @@ export default function Screen() {
   };
 
   /**
-   *
+   * @return filter item for flatList data
    */
   const filteredData = React.useMemo(
     () =>
@@ -67,7 +77,6 @@ export default function Screen() {
   );
 
   /**
-   *
    * @param {*} param0
    * @returns
    */
@@ -79,9 +88,15 @@ export default function Screen() {
     );
   }, []);
 
+  /**
+   * @main return
+   */
   return (
-    <View style={screenStyle.container}>
-      <VideoPlayer vid={videos} />
+    <View
+      style={
+        modeState ? styles.container.lightMode : styles.container.darkMode
+      }>
+      <VideoPlayer videos={videos} />
       <FlatList
         bounces={false}
         ref={topScroll}
@@ -89,7 +104,7 @@ export default function Screen() {
         renderItem={_renderItem}
         ListHeaderComponent={listHeader}
         showsVerticalScrollIndicator={false}
-        contentContainerStyle={screenStyle.contentContainerStyle}
+        contentContainerStyle={styles.contentContainerStyle}
       />
     </View>
   );

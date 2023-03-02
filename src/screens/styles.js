@@ -4,8 +4,14 @@ import {normalize} from '../utils/dimensions';
 
 export const screenStyle = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: colors.white,
+    lightMode: {
+      flex: 1,
+      backgroundColor: colors.white,
+    },
+    darkMode: {
+      flex: 1,
+      backgroundColor: colors.black,
+    },
   },
 
   contentContainerStyle: {
@@ -21,9 +27,19 @@ export const screenStyle = StyleSheet.create({
   },
 
   similarVideoText: {
-    fontWeight: 'bold',
-    fontSize: normalize(20),
-    marginTop: normalize(30),
-    marginLeft: normalize(20),
+    lightMode: {
+      fontWeight: 'bold',
+      color: colors.black,
+      fontSize: normalize(20),
+      marginTop: normalize(30),
+      marginLeft: normalize(20),
+    },
+    darkMode: {
+      fontWeight: 'bold',
+      color: colors.white,
+      fontSize: normalize(20),
+      marginTop: normalize(30),
+      marginLeft: normalize(20),
+    },
   },
 });
